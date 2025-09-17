@@ -34,8 +34,8 @@ const addEmployee = async (req, res) => {
         role,
     } = req.body;
 
-    // console.log("BODY:", req.body);
-    // console.log("FILE:", req.file); 
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file); 
 
     const user = await User.findOne({email})
     if(user) {
