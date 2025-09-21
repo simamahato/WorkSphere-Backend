@@ -18,7 +18,7 @@ app.use(cors({
   credentials: true
 }))
 app.use(express.json())
-app.use(express.static(path.join(__dirname, 'public/uploads')))
+app.use(express.static(path.join('public/uploads')))
 app.use('/api/auth', authRouter)
 app.use('/api/department', departmentRouter)
 app.use('/api/employee', employeeRouter)
