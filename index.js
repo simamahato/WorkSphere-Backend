@@ -14,7 +14,7 @@ import path from 'path';
 connectToDatabase()
 const app = express()
 app.use(cors({
-  origin: "https://worksphere-frontend-inky.vercel.app/",
+  origin: "https://worksphere-frontend-inky.vercel.app",
   credentials: true
 }))
 app.use(express.json())
