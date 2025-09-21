@@ -3,7 +3,7 @@ import Employee from "../models/Employee.js"
 import User from "../models/User.js";
 import bcrypt from 'bcrypt'
 import path from "path"
-import { error } from "console";
+//import { error } from "console";
 import Department from '../models/Department.js'
 import mongoose from "mongoose";
 
@@ -39,7 +39,7 @@ const addEmployee = async (req, res) => {
 
     const user = await User.findOne({email})
     if(user) {
-        console.log(error.message)
+        //console.log(error.message)
         return res.status(400).json({success: false, error: "user always registered in emp"});
     }
     const hashPassword = await bcrypt.hash(password, 10)

@@ -8,16 +8,17 @@ import leaveRouter from './routes/leave.js'
 import SettingRouter from './routes/setting.js'
 import dashboardRouter from './routes/dashboard.js'
 import connectToDatabase from './db/db.js';
+import path from 'path';
 
 
 connectToDatabase()
 const app = express()
 app.use(cors({
-  origin: "https://worksphere-frontend-inky.vercel.app",
+  origin: "https://worksphere-frontend-inky.vercel.app/",
   credentials: true
 }))
 app.use(express.json())
-app.use(express.static('public/uploads'))
+app.use(express.static(path.join(__dirname, 'public/uploads')))
 app.use('/api/auth', authRouter)
 app.use('/api/department', departmentRouter)
 app.use('/api/employee', employeeRouter)
