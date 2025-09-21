@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "public/uploads")
+        cb(null, "/tmp")
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname))
