@@ -1,4 +1,6 @@
 import multer from "multer";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary.js";
 import Employee from "../models/Employee.js"
 import User from "../models/User.js";
 import bcrypt from 'bcrypt'
@@ -7,16 +9,26 @@ import path from "path"
 import Department from '../models/Department.js'
 import mongoose from "mongoose";
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "/tmp")
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname))
-    }
-})
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, "/tmp")
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, Date.now() + path.extname(file.originalname))
+//     }
+// })
 
-const upload = multer({storage: storage})
+// const upload = multer({storage: storage})
+
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "worksphere",
+    allowed_formats: ["jpg", "jpeg", "png"],
+  },
+});
+
+const upload = multer({ storage });
 
 const addEmployee = async (req, res) => {
     try{
@@ -49,7 +61,8 @@ const addEmployee = async (req, res) => {
         email,
         password: hashPassword,
         role,
-        profileImage: req.file ? req.file.filename : ""
+        // profileImage: req.file ? req.file.filename : ""
+        profileImage: req.file ? req.file.path : "" 
     })
 
     const savedUser = await newUser.save()
