@@ -82,6 +82,7 @@ const addEmployee = async (req, res) => {
     return res.status(200).json({success: true, message: "employee created"})
     } catch(error) {
        // console.log(error.message)
+        console.error("ADD EMPLOYEE ERROR:", error); 
          return res.status(500).json({success: false, message: "server error in adding employee"})
     }
 }
@@ -91,6 +92,7 @@ const getEmployees = async(req, res) => {
         const employees = await Employee.find().populate('userId', {password: 0}).populate("department")
         return res.status(200).json({success: true, employees})
     } catch(error){
+        console.error("GET EMPLOYEES ERROR:", error);
         return res.status(500).json({success: false, error: "get employees server  error"})
     }
 }
@@ -160,6 +162,7 @@ const updateEmployee = async(req, res) => {
         return res.status(200).json({success: true, message: "employee updated" }) 
 
     } catch(error){
+        console.error("UPDATE EMPLOYEE ERROR:", error);
         return res.status(500).json({success: false, error: "update employees server error"})
     }
 }
@@ -170,6 +173,7 @@ const fetchEmployeeByDepId = async (req, res) => {
         const employees = await Employee.find({department: id})
         return res.status(200).json({success: true, employees});
     } catch(error){
+        console.error("FETCH BY DEPT ERROR:", error);
         return res.status(500).json({success: false, error: "get employeesByDepId server error"});
     }
 
